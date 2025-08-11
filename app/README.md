@@ -1,8 +1,28 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Prerequisites
+
+- PostgreSQL database running
+- DATABASE_URL configured in app/.env file
+  ```
+  DATABASE_URL="postgresql://username:password@localhost:5432/database_name"
+  ```
+
 ## Getting Started
 
-First, run the development server:
+First, run the database migration:
+
+```bash
+npm run db:migrate
+# or
+yarn db:migrate
+# or
+pnpm db:migrate
+# or
+bun run db:migrate
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev

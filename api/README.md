@@ -31,7 +31,7 @@ go mod download
 
 Start the server:
 ```bash
-go run main.go
+go run ./
 ```
 
 The API will start on port 8080 by default.
