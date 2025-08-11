@@ -17,10 +17,10 @@ export function GoAPITest() {
 
     const response = await fetch("/api/me")
       .then(x => x.json())
-      .then(x => ({data: x}))
-      .catch(e => ({error: e}))
+      .then(x => ({ data: x }))
+      .catch(e => ({ error: e }))
 
-    if (response.error) {
+    if ('error' in response) {
       setApiResponse(`❌ Go API Error: ${response.error}`)
     } else {
       setApiResponse(`✅ Go API Success: ${JSON.stringify(response.data, null, 2)}`)
