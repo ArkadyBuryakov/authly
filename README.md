@@ -37,9 +37,26 @@ A Go service that:
 
 ## Getting Started
 
+### Option 1: Manual Setup
+
 Check the individual README files in each project directory for specific setup instructions:
 - [Frontend Setup](/app/README.md)
 - [Backend Setup](/api/README.md)
+
+### Option 2: Docker Compose
+
+Run all services with Docker Compose:
+
+```bash
+docker-compose up -d
+```
+
+This will start:
+- PostgreSQL database on port 5432
+- Next.js app on port 3000 (with automatic database migration)
+- Go API on port 8080
+
+Both app and API services support hot reload for development.
 
 ## Video Tutorial
 

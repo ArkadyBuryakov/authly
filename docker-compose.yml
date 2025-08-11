@@ -1,0 +1,45 @@
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: authly_user
+      POSTGRES_PASSWORD: authly_password
+      POSTGRES_DB: authly_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U authly_user -d authly_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: ./app
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: "postgresql://authly_user:authly_password@postgres:5432/authly_db"
+      GO_API_URL: "http://api:8080"
+    volumes:
+      - ./app:/app
+      - /app/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  api:
+    build: ./api
+    ports:
+      - "8080:8080"
+    environment:
+      AUTH_API_URL: "http://app:3000/api/auth"
+    volumes:
+      - ./api:/app
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
