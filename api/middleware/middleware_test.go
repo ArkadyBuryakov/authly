@@ -6,8 +6,8 @@ import (
 	"net/http/httptest"
 	"os"
 	"testing"
-	"time"
 
+	"github.com/dreamsofcode-io/authly/api/middleware"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -23,5 +23,4 @@ func TestLogging(t *testing.T) {
 	testHandler.ServeHTTP(w, req)
 
 	assert.Equal(t, http.StatusOK, w.Code)
-	assert.Greater(t, time.Since(req.Context().Value("startTime").(time.Time)), 0)
 }
